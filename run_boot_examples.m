@@ -1,4 +1,4 @@
-%% Bootstrapping Examples
+%% Data Configuration
 
 % 'GR_DAM' / 'IT_PUN' / 'TTF'
 file_srt={'IT_PUN'; 'GR_DAM'};
@@ -25,7 +25,7 @@ for vol_model=vol
 
             ref_day='01-feb-23';
             ref_date = datetime(ref_day, 'InputFormat', 'dd-MMM-yy');
-            end_day='28-Feb-23';
+            end_day='28-feb-23';
             if strcmp(period, '1-month')
                 start_day = ref_date - calmonths(1);
             elseif strcmp(period, '3-month')
@@ -42,6 +42,8 @@ for vol_model=vol
 
             % Number of scenarios loop
             for num_of_scenarios=1000:100:1000
+                log_file=0;
+                file_prefix='';
                 holding_period = datenum(end_day) - datenum(ref_day);
 
                 w = [100, 150, 200];
@@ -70,7 +72,7 @@ for vol_model=vol
                     end
 
                     % Run simulation
-                    average_rf(i) = demo_risk_factors_boot(file, start_day, ref_day, end_day, holding_period, 0.05, vol_model, num_of_scenarios, w(i), subsubfolder);
+                    average_rf(i) = demo_risk_factors_boot(file, start_day, ref_day, end_day, holding_period, 0.05, vol_model, num_of_scenarios, w(i), log_file, file_prefix, subsubfolder);
                 end
             end
 
@@ -82,3 +84,21 @@ for vol_model=vol
         end
     end
 end
+
+%% Example 2
+% for num_of_scenarios=500:100:700
+%     start_day='01-mar-19';
+%     ref_day='01-jul-19';
+%     end_day='01-aug-19';
+%     log_file=0;
+%     file_prefix='stable';
+%     holding_period = datenum(end_day) - datenum(ref_day);
+%     %for w=1:floor(holding_period/5):holding_period
+%     for w=10:10:30
+%         % non_vol
+%         demo_risk_factors_boot({'IT','IT'},{'electricity','electricity'},{'',''}, start_day, ref_day, end_day, holding_period, 0.05, 0, num_of_scenarios, w, log_file, file_prefix);
+% 
+%         % vol
+%         %demo_risk_factors_boot({'IT','IT'},{'electricity','electricity'},{'',''}, start_day, ref_day, end_day, holding_period, 0.05, 1, num_of_scenarios, w, log_file, file_prefix);
+%     end
+% end

@@ -1,4 +1,4 @@
-function average_rf = demo_risk_factors_boot(file, start_date, ref_date, end_date, holding_period, sig, vol_model, numscenarios, w, subfolder)
+function average_rf = demo_risk_factors_boot(file, start_date, ref_date, end_date, holding_period, sig, vol_model, numscenarios, w, log_data, comment, subfolder)
 % This function generates density forecasting corridors for an array of risk factors chosen by the user.
 % Example: demo_risk_factors_boot('01-sep-22', '01-jan-23', '01-feb-23', 155, 0.05, 0, 500, 1)
 
@@ -25,8 +25,8 @@ j1=find(datenum(dates_daily)==ref_date);
 j2=find(datenum(dates_daily)==end_date);
 
 for i=1:numfactors
-    rf(i).time_series = data(s1:j2,i);
-    rf(i).dates = dates_daily(s1:j2);
+    rf(i).time_series = data(s1:j1,i);
+    rf(i).dates = dates_daily(s1:j1);
 end
 
 % Estimate the mean equation for each risk factor
@@ -122,9 +122,23 @@ for i=1:numfactors
 end
 
 %% Save workspace
+
 file_name = 'Risk_Factors_Boot.mat';
 file = fullfile(subfolder, file_name);
 save(file);
+
+%% Log data
+if log_data
+    %'boot_', start_date_str, '_', ref_date_str, '_', end_date, '_', 
+    risk_factor_sim_res = mean(risk_factor_sim.time_series, 2);
+    if vol_model==1
+        vol_model_txt = 'vol';
+    else
+        vol_model_txt = 'nonvol';
+    end
+    filename = strcat(vol_model_txt, '_', num2str(numscenarios), '_', num2str(w), '_', comment, '.csv');
+    csvwrite(filename, risk_factor_sim_res);
+end
 
 %mean(risk_factor_sim.time_series(j+1,:) > risk_factor_sim.time_series(j,:))
 %keyboard
