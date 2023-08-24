@@ -1,4 +1,4 @@
-function [ehat,dates] = synchr_data(mean_model,risk_factor, subfolder)
+function [ehat,dates] = synchr_data(mean_model,risk_factor)
 
 numfactors=length(mean_model);
 numobs=cellfun(@(x) rows(x),{risk_factor.dates});
@@ -15,11 +15,11 @@ v_index=all(~isnan(ehat),2);
 ehat=ehat(v_index,:);
 dates=dates(v_index);
  
-folderPath = fullfile(pwd, subfolder);  
-if ~isfolder(folderPath)  
-    mkdir(folderPath);  
-end
-
-file_name = strcat('Synchr_Data.mat');
-file = fullfile(subfolder, file_name);
-save(file);
+% folderPath = fullfile(pwd, subfolder);  
+% if ~isfolder(folderPath)  
+%     mkdir(folderPath);  
+% end
+% 
+% file_name = strcat('Synchr_Data.mat');
+% file = fullfile(subfolder, file_name);
+% save(file);

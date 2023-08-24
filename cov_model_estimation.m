@@ -1,7 +1,7 @@
-function cov_model = cov_model_estimation(mean_model,risk_factor, subfolder)
+function cov_model = cov_model_estimation(mean_model,risk_factor)
 
 numfactors=length(mean_model);
-[ehat,dates] = synchr_data(mean_model,risk_factor, subfolder);
+[ehat,dates] = synchr_data(mean_model,risk_factor);
 numobs=rows(ehat);
 
 % lambda=0.85;
@@ -26,11 +26,11 @@ cov_model.uhat=uhat;
 cov_model.param=CCC_model.Rbar;
 cov_model.marginal_models=garch_model;
 
-folderPath = fullfile(pwd, subfolder);  
-if ~isfolder(folderPath)  
-    mkdir(folderPath);  
-end
-
-file_name = strcat('Cov_Model_Estimation.mat');
-file = fullfile(subfolder, file_name);
-save(file);
+% folderPath = fullfile(pwd, subfolder);  
+% if ~isfolder(folderPath)  
+%     mkdir(folderPath);  
+% end
+% 
+% file_name = strcat('Cov_Model_Estimation.mat');
+% file = fullfile(subfolder, file_name);
+% save(file);

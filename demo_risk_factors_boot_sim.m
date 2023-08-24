@@ -1,4 +1,4 @@
-function risk_factor_sim = demo_risk_factors_boot(file, start_date, ref_date, end_date, holding_period, sig, vol_model, numscenarios, w, log_data, comment, subfolder)
+function risk_factor_sim = demo_risk_factors_boot_sim(file, start_date, ref_date, end_date, holding_period, sig, vol_model, numscenarios, w, log_data, comment, subfolder)
 % This function generates density forecasting corridors for an array of risk factors chosen by the user.
 % Example: demo_risk_factors_boot('01-sep-22', '01-jan-23', '01-feb-23', 155, 0.05, 0, 500, 1)
 
@@ -33,6 +33,9 @@ end
 
 % Estimate the mean equation for each risk factor
 mean_model = mean_model_estimation(rf, subfolder);
+
+% mean_model = mean_model_estimation_frac(rf);
+
 
 % Generate future scenarios
 if vol_model==1

@@ -1,0 +1,2 @@
+Data_file_1,Data_file_2,Data_file_3,Data_file_4,Data_file_5,Data_file_6,Data_file_7,Data_file_8,Data_file_9,Data_file_10,Data_file_11,Data_file_12,Data_file_13,Data_file_14,Lag_structure_1,Lag_structure_2,Lag_structure_3,Lag_structure_4,Lag_structure_5,Lag_structure_6,Lag_structure_7,Lag_structure_8,Lag_structure_9,Lag_structure_10,Lag_structure_11,Lag_structure_12,Lag_structure_13,Lag_structure_14
+GR_DAM,GR_DAM,GR_DAM,GR_DAM,GR_DAM,GR_DAM,GR_DAM,GR_DAM,GR_DAM,GR_DAM,GR_DAM,GR_DAM,GR_DAM,GR_DAM,1,1,1,1,1,1,1,1,1,1,1,1,1,1

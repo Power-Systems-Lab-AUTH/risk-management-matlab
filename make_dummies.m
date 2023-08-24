@@ -1,9 +1,11 @@
-function D= make_dummies(dates, HD)
+function [MD WD]= make_dummies(dates)
 
 
-MD=dummyvar(month(dates));
+% MD=dummyvar(month(dates));
 
-WD=dummyvar(weekday(dates));
+MD = calc_monthly_determ(dates);
+
+WD=dummyvar2(weekday(dates),1:7);
 
 
-D=[MD(:,2:end) WD(:,2:end)  HD  ];
+% D=[MD(:,2:end) WD(:,2:end)  HD  ];
