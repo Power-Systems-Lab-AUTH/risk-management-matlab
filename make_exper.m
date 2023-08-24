@@ -1,11 +1,5 @@
 function [outputArg1,outputArg2] = make_exper(data_file, sample_size, vol_model, numscenarios, for_hor,sampling_window_length,trend_term,exog_term,frac,lag_structure)
-
-
-
-
 %% Extract data on risk factors
-
-
 numfactors=24;
 
 data = dlmread([data_file, '_price.csv'], ',');
@@ -14,11 +8,8 @@ data(data<1e-1)=1e-1;
 dates = dlmread([data_file, '_dates.csv'], ',');
 dates_daily = dates(:,1);
 
-
-
 som_index=find(day(dates_daily)==1);
 eom_index=som_index-1;
-
 
 index=eom_index<sample_size | eom_index<=0;
 som_index(index)=[];
@@ -29,7 +20,6 @@ start_dates=ref_dates-sample_size+1;
 end_dates=dates_daily(eom_index(for_hor+1:end));
 
 save('setup')
-
 
 numrep=length(end_dates);
 cov_model=[];
@@ -43,8 +33,6 @@ cov_model=[];
 % if vol_model
 % cov_model=cov_model1;
 % end
-
-
 
 % risk_factor_sim=repmat(risk_factor_sim,[1 numrep]);
 % risk_factor=repmat(risk_factor,[numrep 1]);
@@ -68,9 +56,6 @@ parfor i=1:numrep
     % ;
     % end
 
-
-
-
     % catch
     % keyboard
     % end
@@ -89,13 +74,6 @@ parfor i=1:numrep
     m.risk_factor=risk_factor;
     m.mean_model=mean_model 
     m.cov_model=cov_model;
-    
-    
 end
-
 toc
-
-
-
-
 % keyboard
