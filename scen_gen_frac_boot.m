@@ -34,7 +34,7 @@ if vol_model==1
     % Estimate the variance-covariance equation
     cov_model=cov_model_estimation(mean_model,risk_factor);
     % Simulate risk factors
-    % risk_factor_sim=risk_factor_simulation_boot_vol(ref_date,end_date,numscenarios,rf,mean_model,cov_model,w, subfolder);
+    % scen_gen_frac_boot(data, dates_daily,'01-sep-22', '01-jan-23', '01-feb-23', 0, 500, 100,0,1,1,1 )
 
     risk_factor_sim = risk_factor_simulation_frac_boot_vol(ref_date,end_date,numscenarios,risk_factor,mean_model,cov_model, sampling_window_length);
 else
