@@ -2,6 +2,7 @@ function [outputArg1,outputArg2] = make_exper(data_file, sample_size, vol_model,
 %% Extract data on risk factors
 numfactors=24;
 
+% data_file = 'GR_DAM'
 data = dlmread([data_file, '_price.csv'], ',');
 data=data(:,1:24);
 data(data<1e-1)=1e-1;
