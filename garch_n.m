@@ -98,6 +98,9 @@ for k=1:numrepetitions
     warning off
     [parameters(:,k), LLF(k), EXITFLAG(k), OUTPUT, LAMBDA, GRAD] =  fmincon('garch_n_like', startingvals(:,k) ...
         ,sumA  , sumB ,[] , [] , LB , UB,[],options, data, arch , garch);
+    % Unconstrained minimization alternative 
+    % [parameters(:,k), LLF(k), EXITFLAG(k), OUTPUT, LAMBDA, GRAD] =  fminunc('garch_n_like_uncon', startingvals(:,k),options, data, arch , garch);
+
 end
 
 % sect=find(EXITFLAG>1);

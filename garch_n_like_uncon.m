@@ -1,4 +1,4 @@
-function [LLF, LLF_contr, h] = garch_n_like(parameters , data , arch , garch)
+function [LLF, LLF_contr, h] = garch_n_like_uncon(parameters , data , arch , garch)
 % PURPOSE:
 %     Function designed to estimate the likelihood for the univariate Garch model.
 %
@@ -54,16 +54,27 @@ constp=parameters(1);
 archp=parameters(2:arch+1);
 garchp=parameters(arch+2:arch+garch+1);
 
+cond = constp>0 & archp>=0 & garchp>=0 & archp+garchp<1 ;
 
-h = garch_simulate(data,arch,garch,constp,archp,garchp);
 
-if all(h>0)
 
-    LLF_contr = -0.5*(log(2*pi*h)+ data.^2./h);
-    LLF = -sum(LLF_contr);
+if cond
+
+    h = garch_simulate(data,arch,garch,constp,archp,garchp);
+
+    if all(h>0)
+
+        LLF_contr = -0.5*(log(2*pi*h)+ data.^2./h);
+        LLF = -sum(LLF_contr);
+    else
+        LLF_contr=zeros(T,1);
+        h=ones(T,1);
+        LLF=1e06;
+    end
 else
     LLF_contr=zeros(T,1);
     h=ones(T,1);
     LLF=1e06;
 end
+
 

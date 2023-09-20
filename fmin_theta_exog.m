@@ -23,6 +23,7 @@ if ~isempty(lag_structure)
         [rho, stationary]=inverse_ar_roots(ahat(1+(1:length(lag_structure))));
 
     else
+        
         [rho, stationary]=inverse_ar_roots(ahat((1:length(lag_structure))));
 
     end

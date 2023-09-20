@@ -1,6 +1,6 @@
-function [risk_factor_sim, risk_factor,mean_model, cov_model] = scen_gen_frac_boot(data, dates_daily,start_date, ref_date, end_date, vol_model, numscenarios, sampling_window_length,trend_term,dummy_term,frac,lag_structure )
+function [risk_factor_sim, risk_factor,mean_model, cov_model] = scen_gen_frac_mc(data, dates_daily,start_date, ref_date, end_date, vol_model, numscenarios,trend_term,dummy_term,frac,lag_structure )
 % This function generates density forecasting corridors for an array of risk factors chosen by the user.
-% Example: scen_gen_frac_boot(data, dates_daily,'01-sep-22', '01-jan-23', '01-feb-23', 0, 500, 100,0,1,1,1 )
+% Example: demo_risk_factors_boot('01-sep-22', '01-jan-23', '01-feb-23', 155, 0.05, 0, 500, 1)
 
 %% Extract data on risk factors
 
@@ -54,14 +54,15 @@ mean_model = mean_model_estimation_frac(risk_factor,trend_term,dummy_term,frac,l
 if vol_model==1
     % Estimate the variance-covariance equation
     cov_model=cov_model_estimation(mean_model,risk_factor);
+    
     % Simulate risk factors
-    % 
-
-    risk_factor_sim = risk_factor_simulation_frac_boot_vol(ref_date,end_date,numscenarios,risk_factor,mean_model,cov_model, sampling_window_length);
+     risk_factor_sim = risk_factor_simulation_frac_mc_vol(ref_date,end_date,numscenarios,risk_factor,mean_model,cov_model);
+    
 else
     % tic
     cov_model=[];
-    risk_factor_sim=risk_factor_simulation_frac_boot_nonvol(ref_date,end_date,numscenarios,risk_factor,mean_model,sampling_window_length);
+    % Simulate risk factors
+    risk_factor_sim = risk_factor_simulation_frac_mc_nonvol(ref_date,end_date,numscenarios,risk_factor,mean_model);
     % toc
 end
 

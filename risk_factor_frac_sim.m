@@ -8,6 +8,8 @@ for i=1:length(risk_factor)
     Ahat=mean_model(i).Ahat;
     Bhat=mean_model(i).Bhat;
     exog_var_index=mean_model(i).exog_var_index;
+    dummy_term=mean_model(i).dummy_term;
+    trend_term=mean_model(i).trend_term;
     theta_hat=mean_model(i).theta_hat;
 
     dates_est=risk_factor(i).dates;
@@ -19,8 +21,30 @@ for i=1:length(risk_factor)
     dates_ext=(dates_est(1):end_date)';
 
     if exog_var_index
-        [MD WD]=make_dummies(dates_ext);
-        dummies_ext=[MD WD(:,2:end)];
+        if dummy_term~=0
+            [MD, WD]=make_dummies(dates_ext);
+
+        
+            if trend_term 
+
+                switch dummy_term
+                    case 1
+                        dummies_ext=[MD WD(:,2:end)];
+                    case 2
+                        dummies_ext=WD(:,2:end);
+                end
+
+            else
+                switch dummy_term
+                    case 1
+                        dummies_ext=[MD WD];
+                    case 2
+                        dummies_ext=WD;
+                end
+            end
+
+        end
+        
         dummies_ext=dummies_ext(:,exog_var_index);
         Bhat=Bhat(exog_var_index);
     else
@@ -34,7 +58,6 @@ for i=1:length(risk_factor)
 
 
     y_sim = frac_arx_sim(Chat,Ahat,Bhat,theta_hat,y,dummies_ext,squeeze(e_sim(:,i,:)));
-
 
     % y1=squeeze(y_sim(start_p:end,:));
     % y2=repmat(risk_factor(i).time_series,[1 numscenarios]);

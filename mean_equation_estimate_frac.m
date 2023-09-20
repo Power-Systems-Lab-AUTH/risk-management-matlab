@@ -1,12 +1,32 @@
-function [Chat Ahat Bhat theta_hat ehat y exog_var_index] = mean_equation_estimate_frac(dates_daily,data_daily,trend_term,exog_term,frac,lag_structure)
+function [Chat Ahat Bhat theta_hat ehat y exog_var_index] = mean_equation_estimate_frac(dates_daily,data_daily,trend_term,dummy_term,frac,lag_structure)
 
 [numobs numvars]=size(data_daily);
 y=log(data_daily);
 
-if exog_term
+if dummy_term~=0
     [MD WD]=make_dummies(dates_daily);
-    d=[MD WD(:,2:end)];
+
+    if trend_term
+
+
+
+        switch dummy_term
+
+            case 1
+                d=[MD WD(:,2:end)];
+            case 2
+                d=[WD(:,2:end)];
+        end
+    else
+        switch dummy_term
+            case 1
+                d=[MD WD];
+            case 2
+                d=WD;
+        end
+    end
 else
+
     d=[];
 end
 % lag_structure=[1 2 7];

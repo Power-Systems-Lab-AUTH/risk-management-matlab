@@ -1,4 +1,4 @@
-function [outputArg1,outputArg2] = make_exper(data_file, sample_size, vol_model, numscenarios, for_hor,sampling_window_length,trend_term,exog_term,frac,lag_structure)
+function [outputArg1,outputArg2] = make_exper(data_file, sample_size, vol_model, numscenarios, for_hor,sampling_window_length,trend_term,dummy_term,frac,lag_structure)
 %% Extract data on risk factors
 numfactors=24;
 
@@ -41,11 +41,12 @@ cov_model=[];
 % cov_model=repmat(cov_model,[numrep 1]);
 
 tic
-parfor i=1:numrep
+for i=1:numrep
 % for i=1:numrep
     i
     % try
-    [risk_factor_sim, risk_factor,mean_model, cov_model] = scen_gen_frac_boot(data, dates_daily,start_dates(i),ref_dates(i), end_dates(i), vol_model, numscenarios, sampling_window_length,trend_term,exog_term,frac,lag_structure);
+    tic
+    [risk_factor_sim, risk_factor,mean_model, cov_model] = scen_gen_frac_boot(data, dates_daily,start_dates(i),ref_dates(i), end_dates(i), vol_model, numscenarios, sampling_window_length,trend_term,dummy_term,frac,lag_structure);
 
     % risk_factor_sim(:,i)=risk_factor_sim1;
     % risk_factor(i,:)=risk_factor1;
@@ -60,6 +61,7 @@ parfor i=1:numrep
     % catch
     % keyboard
     % end
+    toc
     mm=month(ref_dates(i)+1);
 
     yy=year(ref_dates(i));

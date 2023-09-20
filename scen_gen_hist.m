@@ -1,30 +1,8 @@
-function [risk_factor_sim, risk_factor,mean_model, cov_model] = scen_gen_frac_boot(data, dates_daily,start_date, ref_date, end_date, vol_model, numscenarios, sampling_window_length,trend_term,dummy_term,frac,lag_structure )
-% This function generates density forecasting corridors for an array of risk factors chosen by the user.
-% Example: scen_gen_frac_boot(data, dates_daily,'01-sep-22', '01-jan-23', '01-feb-23', 0, 500, 100,0,1,1,1 )
+function [risk_factor_sim, risk_factor] = scen_gen_hist(data, dates_daily,start_date, ref_date, end_date, numscenarios)
 
-%% Extract data on risk factors
-
-% if(isdatetime(start_date))
-
-%trend_term, dummy_term,frac,lag_structure are parameters of the mean model
-
-% TREND_TERM is the fractional trend indicator variable (takes the value 1
-% if the mean model includes a fractional trend term) 
-
-% DUMMY_TERM is the dummy indicator variable (takes the value 1 both
-% monthly and weekday
-% dummies are included, 2 if only weekday dummies are included and 0 if the
-% mean model does not include seasonal deterministics)
-
-% FRAC is an indicator variable taking value 1 if energy index is assumed
-% fractionally integrated with parameter D. If FRAC=0 the mean model is
-% based on log-differences of index levels
-
-% LAG_STRUCTURE is an integer array specifying the number and order or
-% lagged dependent variables (AR terms) in the mean model. LAG_STRUCTURE=[1
-% 2 7] means that the model includes 1st, 2nd and 7th order lags. If
-% LAG_STRUCTURE=[] the mean model includes no lagged dependent variables  
-% 
+% Before executing the code it is important to check whether the length of
+% the sample period [length(DATES_DAILY)-1] is greater than the length of
+% the simulation period 
 
 numfactors=cols(data);
 start_date=datenum(start_date);
@@ -43,27 +21,8 @@ for i=1:numfactors
     risk_factor(i).dates = dates_daily(s1:j1);
 end
 
-% Estimate the mean equation for each risk factor
-% mean_model = mean_model_estimation(rf, subfolder);
+risk_factor_sim = risk_factor_simulation_hist(ref_date,end_date,numscenarios,risk_factor);
 
-% risk_factor=risk_factor(1);
-mean_model = mean_model_estimation_frac(risk_factor,trend_term,dummy_term,frac,lag_structure);
-
-
-% Generate future scenarios
-if vol_model==1
-    % Estimate the variance-covariance equation
-    cov_model=cov_model_estimation(mean_model,risk_factor);
-    % Simulate risk factors
-    % 
-
-    risk_factor_sim = risk_factor_simulation_frac_boot_vol(ref_date,end_date,numscenarios,risk_factor,mean_model,cov_model, sampling_window_length);
-else
-    % tic
-    cov_model=[];
-    risk_factor_sim=risk_factor_simulation_frac_boot_nonvol(ref_date,end_date,numscenarios,risk_factor,mean_model,sampling_window_length);
-    % toc
-end
 
 risk_factor_sim1.time_series = structMean(risk_factor_sim);
 risk_factor_sim1.dates = risk_factor_sim(1).dates;
