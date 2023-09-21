@@ -1,5 +1,5 @@
 function [risk_factor_sim, risk_factor] = scen_gen_hist(data, dates_daily,start_date, ref_date, end_date, numscenarios)
-
+% Example: scen_gen_hist(data, dates_daily,'01-sep-22', '01-jan-23', '01-feb-23', 500)
 % Before executing the code it is important to check whether the length of
 % the sample period [length(DATES_DAILY)-1] is greater than the length of
 % the simulation period 
