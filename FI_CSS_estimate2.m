@@ -12,43 +12,14 @@ if frac
 
     options=optimset('Display','off','TolFun',1e-6,'TolX',1e-6,'TolCon',1e-4);
 
-
-
-    % dy=fracdiff(y,dstar);
-    % dy=demean(dy);
-
-    % dy=fracdiff(y,dstar);
-
     LB=0;
     UB=3/2;
     numobs=length(y);
-
-    % if ~isempty(exog)
-    %     determ1=[ones(numobs-1,1) diff(determ)];
-    % exog1=[diff(exog)];
-    % I=eye(numobs-1,numobs-1);
-    % exog_params=inv(exog1'*exog1)*exog1'*dy;
-    % Md=I-determ1*inv(determ1'*determ1)*determ1';
-    % dy=Md*dy;
-    % dy=dy-exog1*exog_params;
-    % else
-    % exog_params=[];
-    % end
-
-
 
     numstartingvals=10;
 
     theta_0=unifrnd(LB,UB,1,numstartingvals);
     theta_hat=theta_0;
-    % b=-0.1:0.01:1;
-    % clear fhat
-    % for i=1:length(b);
-    %     [fhat(i), ehat] = fmin_thetas(b(i),dy,AR,MA);
-    % end
-    % plot(b,fhat)
-
-    % theta_0=0.8-dstar;
     for i=1:length(theta_0)
         try
             [theta_hat(:,i), f(i), exitflag(i) output] = fmincon('fmin_theta_exog',theta_0(:,i),[],[],[],[],LB,UB,[],options,dy,dexog,AR,1,trend_term);
