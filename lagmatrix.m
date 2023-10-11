@@ -10,4 +10,4 @@ for i=1:nlags
     col_index=(i-1)*N+1:i*N;
     X_new(lags(i)+1:end,col_index)=X(1:end-lags(i),:);
 end
-
+y=1;

@@ -17,3 +17,4 @@ k = k';
 b = (k-d-1)./k;
 b = [1; cumprod(b)];
 dx = filter(b,1,x);
+y=1
