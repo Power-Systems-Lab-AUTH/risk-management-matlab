@@ -20,9 +20,9 @@ if dummy_term~=0
     else
         switch dummy_term
             case 1
-                d=[MD WD];
+                d=[MD WD(:,2:end)];
             case 2
-                d=WD;
+                d=WD(:,2:end);
         end
     end
 else

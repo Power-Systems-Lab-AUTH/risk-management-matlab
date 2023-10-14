@@ -6,7 +6,7 @@ y_values = arrayfun(@(x) fmin_theta_exog(x, X_dstar,exog_dstar,lag_structure,dst
 
 figure;
 plot(x_values, y_values, 'b', 'DisplayName', 'fmin_theta_exog');
-title('Plot of fmin_theta_exog');
+title('Plot of fmin-theta-exog');
 xlabel('Theta');
 ylabel('Function Value');
 ylim([0 10]);
