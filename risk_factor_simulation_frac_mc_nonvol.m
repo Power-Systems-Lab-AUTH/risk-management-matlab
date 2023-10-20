@@ -13,7 +13,7 @@ cov_matr=nancov(ehat);
 
 e_sim=nan(holding_period,length(mu),numscenarios);
 for t=1:holding_period
-    e1=mvnrnd(mu,cov_matr,numscenarios);
+    e1=mvnrnd(mu,cov_matr,numscenarios); % same seed
     e_sim(t,:,:)=e1';
 end
 

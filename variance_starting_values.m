@@ -135,9 +135,9 @@ if ~(arch==0 & garch==0)
     
     % shuffle starting values
     if numvals<=K
-        index=randsample(K,numvals);
+        index=randsample(K,numvals); % same seed
     else
-        index=randsample(K,numvals,1);
+        index=randsample(K,numvals,1); % same seed
     end
     startingvals=startingvals(:,index);
 else

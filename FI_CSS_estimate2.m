@@ -18,7 +18,7 @@ if frac
 
     numstartingvals=10;
 
-    theta_0=unifrnd(LB,UB,1,numstartingvals);
+    theta_0=unifrnd(LB,UB,1,numstartingvals); % same seed
     theta_hat=theta_0;
     for i=1:length(theta_0)
         try
