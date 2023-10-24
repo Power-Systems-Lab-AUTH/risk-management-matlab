@@ -1,4 +1,4 @@
-function [startingvals,nu,lambda,LLs,output_parameters]=variance_starting_values(data,arch,garch,distr_model,numvals)
+function [startingvals,nu,lambda,LLs,output_parameters]=variance_starting_values(data,arch,garch,distr_model,numvals)          %Checked
 % Perform a grid search to find decent starting values for TARCH(arch,O,Q)
 % esimtation.  If starting values are user supplied (and thus nonempty), reformats
 % starting values depending on error_type.

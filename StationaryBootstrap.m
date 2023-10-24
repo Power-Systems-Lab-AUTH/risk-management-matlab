@@ -1,4 +1,4 @@
-function sample = StationaryBootstrap(data, m, sampleLength)
+function sample = StationaryBootstrap(data, m, sampleLength)    %Checked
 % STATIONARY BOOTSTRAP Returns a bootstraped sample of the time-series
 % "data" of length "sampleLength. The algorithm used is stationary bootstrap
 % from 1994 Politis & Romano.

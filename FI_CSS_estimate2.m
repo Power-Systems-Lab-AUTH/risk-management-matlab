@@ -1,4 +1,4 @@
-function [theta_hat, std_theta, ehat, ahat,XX_hat] = FI_CSS_estimate2(y,AR,MA,exog,trend_term,frac)
+function [theta_hat, std_theta, ehat, ahat,XX_hat] = FI_CSS_estimate2(y,AR,MA,exog,trend_term,frac)  %Checked
 
 
 % if nargin<5
