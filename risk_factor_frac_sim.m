@@ -37,9 +37,9 @@ for i=1:length(risk_factor)
             else
                 switch dummy_term
                     case 1
-                        dummies_ext=[MD WD];
+                        dummies_ext=[MD WD(:,2:end)];
                     case 2
-                        dummies_ext=WD;
+                        dummies_ext=WD(:,2:end);
                 end
             end
 

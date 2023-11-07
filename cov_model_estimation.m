@@ -2,6 +2,13 @@ function cov_model = cov_model_estimation(mean_model,risk_factor)
 
 numfactors=length(mean_model);
 [ehat,dates] = synchr_data(mean_model,risk_factor);
+
+% New amendment----------------------
+threshold=0.5;
+ehat=filter_errors(ehat,threshold);
+%----------------------
+
+
 numobs=rows(ehat);
 
 % lambda=0.85;

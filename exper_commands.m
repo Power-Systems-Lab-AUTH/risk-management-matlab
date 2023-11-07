@@ -4,28 +4,36 @@ function exper_commands
 % % data_file='IT_PUN';
 % curdir='C:\Users\Pandelis\risk-management-matlab\IT_PUN';
 
-curdir='C:\Users\Pandelis\risk-management-matlab\GR_DAM_no_frac';
+% curdir='C:\Users\Pandelis\risk-management-matlab\GR_DAM_no_frac';
 
-data_file='GR_DAM';
+curdir='D:\RiskProject\IT_PUN_stat';
+
+
+data_file='IT_PUN';
 % curdir='C:\Users\Pandelis\risk-management-matlab\IT_PUN_no_frac';
 
 
 cd(curdir)
 
-vol_model=[0 1];
-for_hor=[1:6];
-trend_term=[0 1];
+% vol_model=[0 1];
+vol_model=0;
 
-dummy_term=[1 0 -1];
+% for_hor=[1 3 6];
+for_hor=3;
 
-sample_size=[250 500];
+% trend_term=[1 0];
+trend_term=1;
+% dummy_term=[0 1 2];
+dummy_term=0;
 
-lag_structure={[],[1]};
+sample_size=250;
 
-sampling_size_window=[10 50 100];
-frac=[0 1];
+lag_structure={[1]};
 
-% frac=[0];
+sampling_size_window=[100];
+frac=[0];
+
+
 index=0;
 
 for j=1:length(vol_model)

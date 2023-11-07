@@ -4,6 +4,7 @@ function mean_model = mean_model_estimation_frac(risk_factor,trend_term,dummy_te
 % q=0.05;
 numfactors=length(risk_factor);
 for i=1:numfactors
+    i
     %disp(['Estimating the mean model of factor #' num2str(i)]);
     time_series=risk_factor(i).time_series;
     

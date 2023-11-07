@@ -43,7 +43,7 @@ for i=1:numvars
         % [Chat(i,:), A1(:,i), B1, e1] = arx_estimation(Y1, lags, exog1);
         
         [theta_hat(i,:), dummy, e2, ahat] = FI_CSS_estimate2(Y1,lags,[],exog1,trend_term,frac);
-
+% theta_hat(:,i)=0;
 
 
         e1=nan(numobs,1);

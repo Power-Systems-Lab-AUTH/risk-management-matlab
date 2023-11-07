@@ -50,6 +50,7 @@ end
 mean_model = mean_model_estimation_frac(risk_factor,trend_term,dummy_term,frac,lag_structure);
 
 
+
 % Generate future scenarios
 if vol_model==1
     % Estimate the variance-covariance equation
@@ -62,6 +63,7 @@ else
     % tic
     cov_model=[];
     risk_factor_sim=risk_factor_simulation_frac_boot_nonvol(ref_date,end_date,numscenarios,risk_factor,mean_model,sampling_window_length);
+    % keyboard
     % toc
 end
 
@@ -70,26 +72,26 @@ risk_factor_sim1.dates = risk_factor_sim(1).dates;
 risk_factor_sim = risk_factor_sim1;
 
 % dates_simulation = dates_daily;
-s1=400;
-real_rf = mean(data(s1:j2, :), 2);
-mean_rf = [mean(data(s1:j1, :), 2); mean(risk_factor_sim.time_series(j1+1:end, :), 2)];
-percentile_20 = [mean(data(s1:j1, :), 2); prctile(risk_factor_sim.time_series(j1+1:end, :)', 20)'];
-percentile_50 = [mean(data(s1:j1, :), 2); prctile(risk_factor_sim.time_series(j1+1:end, :)', 50)'];
-percentile_80 = [mean(data(s1:j1, :), 2); prctile(risk_factor_sim.time_series(j1+1:end, :)', 80)'];
-
-figure
-plot(percentile_20)
-hold on
-plot(percentile_50)
-hold on
-plot(percentile_80)
-hold on
-plot(mean_rf)
-hold on
-plot(real_rf)
-legend('p20', 'p50', 'p80', 'mean', 'real')
-ylim([0 750])
-y=1;
+% s1=400;
+% real_rf = mean(data(s1:j2, :), 2);
+% mean_rf = [mean(data(s1:j1, :), 2); mean(risk_factor_sim.time_series(j1+1:end, :), 2)];
+% percentile_20 = [mean(data(s1:j1, :), 2); prctile(risk_factor_sim.time_series(j1+1:end, :)', 20)'];
+% percentile_50 = [mean(data(s1:j1, :), 2); prctile(risk_factor_sim.time_series(j1+1:end, :)', 50)'];
+% percentile_80 = [mean(data(s1:j1, :), 2); prctile(risk_factor_sim.time_series(j1+1:end, :)', 80)'];
+% 
+% figure
+% plot(percentile_20)
+% hold on
+% plot(percentile_50)
+% hold on
+% plot(percentile_80)
+% hold on
+% plot(mean_rf)
+% hold on
+% plot(real_rf)
+% legend('p20', 'p50', 'p80', 'mean', 'real')
+% ylim([0 750])
+% y=1;
 % keyboard
 
 % % Produce graphs

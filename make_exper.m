@@ -41,11 +41,11 @@ cov_model=[];
 % cov_model=repmat(cov_model,[numrep 1]);
 
 tic
+% for i=20:numrep
 for i=1:numrep
-% for i=1:numrep
     i
     % try
-    tic
+    % tic
     [risk_factor_sim, risk_factor,mean_model, cov_model] = scen_gen_frac_boot(data, dates_daily,start_dates(i),ref_dates(i), end_dates(i), vol_model, numscenarios, sampling_window_length,trend_term,dummy_term,frac,lag_structure);
 
     % risk_factor_sim(:,i)=risk_factor_sim1;
@@ -61,7 +61,7 @@ for i=1:numrep
     % catch
     % keyboard
     % end
-    toc
+    % toc
     mm=month(ref_dates(i)+1);
 
     yy=year(ref_dates(i));

@@ -11,7 +11,10 @@ holding_period=length(dates_sim);
 
 ehat = synchr_data(mean_model,risk_factor);
 
-
+% New amendment----------------------
+threshold=0.5;
+ehat=filter_errors(ehat,threshold);
+%----------------------
 
 nobs=rows(ehat);
 boot_data_indices=stationary_bootstrap3(nobs,holding_period,sampling_window_length,numscenarios);

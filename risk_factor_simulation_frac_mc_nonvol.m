@@ -8,6 +8,12 @@ holding_period=length(dates_sim);
 
 ehat = synchr_data(mean_model,risk_factor);
 
+% New amendment----------------------
+threshold=0.5;
+ehat=filter_errors(ehat,threshold);
+%----------------------
+
+
 mu=nanmean(ehat);
 cov_matr=nancov(ehat);
 

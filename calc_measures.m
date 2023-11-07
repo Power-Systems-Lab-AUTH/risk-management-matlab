@@ -3,7 +3,8 @@ function [outputArg1,outputArg2] = calc_measures(quantiles,data_name)
 
 % curdir='C:\Users\Pandelis\risk-management-matlab';
 
-curdir=['C:\Users\Pandelis\risk-management-matlab\' data_name];
+
+curdir=['D:\RiskProject\' data_name];
 
 cd(curdir);
 
@@ -20,6 +21,7 @@ A(~isfolder({A.name}))=[];
 N=length(A);
 
 for i=1:length(A)
+    i
     cd([curdir '\' A(i).name]);
 
     load setup.mat
@@ -30,7 +32,7 @@ for i=1:length(A)
     Sampling_window_length{i,:}=num2str(sampling_window_length);
     Vol_model{i,:}=num2str(vol_model);
     Trend_term{i,:}=num2str(trend_term);
-    Exog_term{i,:}=num2str(exog_term);
+    Dummy_term{i,:}=num2str(dummy_term);
     Lag_structure{i,:}=num2str(lag_structure);
     Data_file{i,:}=data_file;
 
@@ -57,7 +59,7 @@ cd(curdir);
 [~,I]=sort(For_hor);
 
 T = table(Name,Data_file,For_hor,Sample_size,Sampling_window_length,...
-    Vol_model,Trend_term,Exog_term,Lag_structure,MAE,hit_rate);
+    Vol_model,Trend_term,Dummy_term,Lag_structure,MAE,hit_rate);
 T=sortrows(T,'MAE');
 
 filename = ['exper_list_' data_name '.xlsx'];
